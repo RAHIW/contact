@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Contact Us - Digital Idea</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.6.0/fonts/remixicon.css" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-dark: #0e0e10;
+      --text-white: #ffffff;
+      --text-light-grey: #b0b0b0;
+      --highlight-blue: #4da6ff;
+      --btn-orange: #ff6b35;
+      --card-bg: #18181b;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+    html, body { height: 100%; }
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-white);
+      line-height: 1.8;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    a { color: inherit; text-decoration: none; }
+
+    /* Header */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 80px;
+      position: relative;
+      z-index: 100;
+      background: linear-gradient(180deg, rgba(14,14,16,0.85), rgba(14,14,16,0.65));
+      backdrop-filter: blur(4px);
+    }
+
+    .logo { display:flex; align-items:center; gap:6px; font-weight:700; font-size:24px; text-transform:uppercase; }
+    .logo a { display:flex; align-items:center; gap:6px; color:inherit; text-decoration:none; }
+    .logo-D { color:var(--highlight-blue); font-size:30px; }
+
+    .nav-links {
+      display:flex; align-items:center; gap:26px; transition:0.3s ease-in-out;
+    }
+    .nav-links a { color:var(--text-light-grey); font-weight:600; padding:6px 8px; border-radius:6px; }
+    .nav-links a:hover, .nav-links a:focus, .nav-links .active { color:var(--text-white); background: rgba(255,255,255,0.02); }
+
+    .btn-touch {
+      text-decoration: none;
+      color: var(--btn-orange);
+      border: 2px solid var(--btn-orange);
+      padding: 8px 20px;
+      border-radius: 5px;
+      font-weight: 600;
+      transition: background-color 0.3s, color 0.3s;
+      display:none; /* hide by default, show via media query */
+    }
+    .btn-touch:hover, .btn-touch:focus { background-color:var(--btn-orange); color:var(--bg-dark); outline:none; }
+
+    /* Desktop Get In Touch button */
+    .header-btn-desktop { display:inline-block; }
+
+    /* Hamburger */
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      width:36px; height:30px; gap:6px;
+      background:transparent; border:0; cursor:pointer;
+    }
+    .menu-toggle:focus { outline:2px solid rgba(77,166,255,0.28); border-radius:6px; }
+    .menu-toggle span { display:block; height:3px; width:100%; background:var(--text-white); border-radius:3px; transition:0.3s; }
+
+    /* Contact Section */
+    .contact-section { padding:100px 40px; text-align:center; max-width:1000px; margin:0 auto; }
+    .contact-section h1 { font-size:42px; color:var(--highlight-blue); margin-bottom:20px; }
+    .contact-section p { color:var(--text-light-grey); font-size:18px; margin-bottom:60px; }
+
+    .contact-buttons {
+      display:flex; flex-direction:column; align-items:center; gap:18px; max-width:520px; margin:0 auto;
+    }
+    .contact-btn {
+      display:flex; align-items:center; justify-content:center; width:100%;
+      padding:16px 18px; font-size:18px; font-weight:600; color:#fff; border-radius:12px;
+      text-decoration:none; transition:transform .18s ease, opacity .18s ease;
+    }
+    .contact-btn i { font-size:22px; margin-right:10px; opacity:0.98; }
+
+    .contact-btn:hover { transform:translateY(-4px); opacity:0.95; }
+
+    .facebook { background-color:#1877f2; }
+    .whatsapp { background-color:#25d366; }
+    .telegram { background-color:#0088cc; }
+    .email { background-color:var(--btn-orange); }
+    .phone { background-color:#444444; }
+
+    /* Footer */
+    .footer-section { background-color:#101013; padding:80px 100px; border-top:1px solid #1f1f23; margin-top:40px; }
+    .footer-content { display:flex; flex-wrap:wrap; justify-content:space-between; gap:50px; }
+    .footer-logo-area .logo { font-size:22px; }
+    .footer-logo-area .tagline { color:var(--text-light-grey); font-size:15px; margin-top:10px; }
+
+    .footer-main-links { display:grid; grid-template-columns:repeat(3,1fr); gap:50px; flex:1; }
+    .footer-column h3 { color:var(--highlight-blue); margin-bottom:15px; font-size:18px; }
+    .footer-column ul { list-style:none; }
+    .footer-column ul li { margin-bottom:8px; }
+    .footer-column a { color:var(--text-light-grey); text-decoration:none; transition:color .3s; }
+    .footer-column a:hover, .footer-column a:focus { color:var(--text-white); }
+
+    .email-link { color:var(--btn-orange); font-weight:600; text-decoration:none; transition:color .3s; }
+    .email-link:hover, .email-link:focus { color:var(--highlight-blue); outline:none; }
+
+    /* Helpers */
+    .sr-only {
+      position:absolute !important; height:1px; width:1px; overflow:hidden; clip:rect(1px,1px,1px,1px); white-space:nowrap;
+    }
+
+    /* Responsive */
+    @media (max-width:900px) {
+      .navbar { padding:20px 30px; }
+      .menu-toggle { display:flex; }
+
+      .nav-links {
+        position:absolute; top:100%; left:0; width:100%;
+        flex-direction:column; align-items:center; background-color:#0f0f11;
+        padding:2.2rem 0; gap:1rem;
+        transform:translateY(-200%); opacity:0; pointer-events:none;
+        transition:transform .35s ease, opacity .35s ease;
+      }
+      .nav-links a { font-size:16px; padding:10px 14px; width:calc(100% - 60px); text-align:center; }
+
+      .nav-links.active { transform:translateY(0); opacity:1; pointer-events:auto; }
+
+      .menu-toggle.active span:nth-child(1) { transform:rotate(45deg) translateY(8px); }
+      .menu-toggle.active span:nth-child(2) { opacity:0; transform:translateX(-10px); }
+      .menu-toggle.active span:nth-child(3) { transform:rotate(-45deg) translateY(-8px); }
+
+      /* Hide desktop-only Get In Touch on mobile */
+      .header-btn-desktop { display:none; }
+      /* Show mobile Get In Touch inside nav */
+      .nav-links .btn-touch { display:inline-block; }
+
+      .contact-section { padding:60px 20px; }
+      .contact-section h1 { font-size:36px; }
+      .contact-section p { font-size:16px; }
+      .contact-btn { font-size:16px; }
+
+      .footer-section { padding:60px 40px; }
+      .footer-main-links { grid-template-columns:1fr; gap:30px; }
+    }
+
+    /* Prevent body scroll when mobile menu open */
+    .no-scroll { overflow:hidden; height:100%; }
+  </style>
+</head>
+<body>
+
+  <header class="navbar">
+    <div class="logo">
+      <a href="index.html" aria-label="Go to Digital Idea home">
+        <span class="logo-D"></span>
+        <span class="logo-text">DIGITAL IDEA</span>
+      </a>
+    </div>
+
+    <!-- hamburger -->
+    <button id="menu-toggle" class="menu-toggle" aria-controls="nav-links" aria-expanded="false" aria-label="Toggle navigation menu">
+      <span></span><span></span><span></span>
+    </button>
+
+    <!-- nav -->
+    <nav id="nav-links" class="nav-links" role="navigation" aria-label="Main navigation">
+      <a href="index.html" aria-current="false">Home</a>
+      <a href="Services.html" aria-current="false">Services</a>
+      <a href="about.html" aria-current="false">About</a>
+      <a href="contc.html" class="active" aria-current="page">Contact</a>
+      <!-- mobile Get In Touch (hidden on desktop via CSS) -->
+      <a href="contc.html" class="btn-touch">Get In Touch</a>
+    </nav>
+
+    <!-- desktop Get In Touch -->
+    <a href="mailto:digitalidea@gmail.com" class="btn-touch header-btn-desktop">Get In Touch</a>
+  </header>
+
+  <main>
+    <section class="contact-section" aria-labelledby="contact-heading">
+      <h1 id="contact-heading">Contact Us</h1>
+      <p>Choose your preferred way to connect with Digital Idea 🚀</p>
+
+      <div class="contact-buttons">
+        <a class="contact-btn facebook" href="https://facebook.com/profile.php?id=61559900507381" target="_blank" rel="noopener noreferrer">
+          <i class="ri-facebook-fill"></i> Contact via Facebook
+        </a>
+
+        <a class="contact-btn whatsapp" href="https://wa.me/8801721029591" target="_blank" rel="noopener noreferrer">
+          <i class="ri-whatsapp-fill"></i> Contact via WhatsApp
+        </a>
+
+        <a class="contact-btn telegram" href="https://t.me/digitalideabd" target="_blank" rel="noopener noreferrer">
+          <i class="ri-telegram-fill"></i> Contact via Telegram
+        </a>
+
+        <a class="contact-btn email" href="mailto:digitalidea@gmail.com">
+          <i class="ri-mail-fill"></i> Contact via Email
+        </a>
+
+        <a class="contact-btn phone" href="tel:+8801721029591">
+          <i class="ri-phone-fill"></i> Contact via Phone
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer-section" role="contentinfo">
+    <div class="container footer-content">
+      <div class="footer-logo-area">
+        <div class="logo">
+          <span class="logo-D"></span>
+          <span class="logo-text">DIGITAL IDEA</span>
+        </div>
+        <p class="tagline">We help you become more visible online</p>
+      </div>
+
+      <div class="footer-main-links">
+        <div class="footer-column links-column">
+          <h3>Links:</h3>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="Services.html">Services</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contc.html">Contact</a></li>
+            <li><a href="#">Blog</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-column find-us-column">
+          <h3>Find Us:</h3>
+          <p>
+            Chonua,<br>
+            Feni 3901,<br>
+            Bangladesh
+          </p>
+        </div>
+
+        <div class="footer-column email-column">
+          <h3>Email Us:</h3>
+          <a class="email-link" href="mailto:digitalidea@gmail.com">digitalidea@gmail.com</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    (function() {
+      const menuToggle = document.getElementById('menu-toggle');
+      const navLinks = document.getElementById('nav-links');
+
+      function openMenu() {
+        menuToggle.classList.add('active');
+        navLinks.classList.add('active');
+        menuToggle.setAttribute('aria-expanded', 'true');
+        document.documentElement.classList.add('no-scroll');
+        document.body.classList.add('no-scroll');
+      }
+      function closeMenu() {
+        menuToggle.classList.remove('active');
+        navLinks.classList.remove('active');
+        menuToggle.setAttribute('aria-expanded', 'false');
+        document.documentElement.classList.remove('no-scroll');
+        document.body.classList.remove('no-scroll');
+      }
+
+      menuToggle.addEventListener('click', (e) => {
+        const expanded = menuToggle.getAttribute('aria-expanded') === 'true';
+        if (expanded) closeMenu(); else openMenu();
+      });
+
+      // close on outside click
+      document.addEventListener('click', (e) => {
+        const target = e.target;
+        if (!menuToggle.contains(target) && !navLinks.contains(target)) {
+          if (navLinks.classList.contains('active')) closeMenu();
+        }
+      });
+
+      // close on Escape
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && navLinks.classList.contains('active')) {
+          closeMenu();
+          menuToggle.focus();
+        }
+      });
+
+      // close menu when link clicked (mobile)
+      navLinks.addEventListener('click', (e) => {
+        if (e.target.tagName === 'A' && navLinks.classList.contains('active')) {
+          setTimeout(() => closeMenu(), 50);
+        }
+      });
+    })();
+  </script>
+
+</body>
+</html>
